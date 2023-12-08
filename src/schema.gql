@@ -1,0 +1,63 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ImageGQL {
+  id: ID!
+  url: String!
+  priority: Int!
+  product: ProductGQL
+}
+
+type ProductGQL {
+  id: ID!
+  name: String!
+  price: Float!
+  status: ProductStatus!
+  images: [ImageGQL!]
+}
+
+enum ProductStatus {
+  ACTIVE
+  INACTIVE
+}
+
+type Query {
+  products: [ProductGQL!]!
+  product(id: ID!): ProductGQL
+  images: [ImageGQL!]!
+  image(id: ID!): ImageGQL
+}
+
+type Mutation {
+  createProduct(input: CreateProductInput!): ProductGQL
+  updateProduct(id: ID!, input: UpdateProductInput!): ProductGQL
+  deleteProduct(id: ID!): ProductGQL
+  createImage(input: CreateImageInput!): ImageGQL
+  updateImage(id: ID!, input: UpdateImageInput!): ImageGQL
+  deleteImage(id: ID!): ImageGQL
+}
+
+input CreateProductInput {
+  name: String!
+  price: Float!
+  status: ProductStatus!
+  imageIds: [Int!]!
+}
+
+input UpdateProductInput {
+  name: String
+  price: Float
+  status: ProductStatus
+  imageIds: [Int!]
+}
+
+input CreateImageInput {
+  url: String!
+  priority: Int!
+}
+
+input UpdateImageInput {
+  url: String
+  priority: Int
+}
